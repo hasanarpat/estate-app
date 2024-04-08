@@ -62,6 +62,16 @@
           align-items: center;
           gap: 20px;
         }
+
+        button {
+          width: 100px;
+          background-color: teal;
+          color: #fff;
+          padding: 12px 24px;
+          border: none;
+          border-radius: 12px;
+          cursor: pointer;
+        }
       }
     }
   }
