@@ -57,7 +57,7 @@ const SinglePage = () => {
             </div>
           </div>
           <p className='title'>Room Sizes</p>
-          <div className='listHorizontal'>
+          <div className='listHorizontal sizes'>
             <div className='size'>
               <img src='/size.png' alt='' />
               <span>80sqft</span>

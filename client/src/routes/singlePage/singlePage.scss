@@ -1,12 +1,25 @@
+@import '../../responsive.scss';
+
 .singlePage {
   display: flex;
   height: 100%;
+
+  @include md {
+    flex-direction: column;
+    overflow-y: scroll;
+    gap: 50px;
+  }
 
   .details {
     flex: 3;
     height: 100%;
     overflow-y: scroll;
 
+    @include md {
+      flex: none;
+      height: max-content;
+      overflow: auto;
+    }
     .wrapper {
       padding-right: 50px;
 
@@ -78,6 +91,14 @@
     height: 100%;
     overflow-y: scroll;
     background-color: #fcf5f3;
+
+    @include md {
+      flex: none;
+      height: max-content;
+      overflow: auto;
+      margin-bottom: 50px;
+    }
+
     .wrapper {
       padding: 0px 20px;
 
@@ -129,6 +150,10 @@
         align-items: center;
         justify-content: space-between;
         gap: 10px;
+
+        @include lg {
+          font-size: 5px;
+        }
 
         .size {
           padding: 5px 10px;
