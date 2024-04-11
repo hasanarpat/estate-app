@@ -43,6 +43,8 @@ const Filter = () => {
             type='number'
             name='minPrice'
             id='minPrice'
+            min={0}
+            max={100000}
             placeholder='any'
           />
         </div>
@@ -52,12 +54,21 @@ const Filter = () => {
             type='number'
             name='maxPrice'
             id='maxPrice'
+            min={0}
+            max={100000}
             placeholder='any'
           />
         </div>
         <div className='item'>
           <label htmlFor='bedroom'>Bedroom</label>
-          <input type='number' name='bedroom' id='bedroom' placeholder='any' />
+          <input
+            type='number'
+            name='bedroom'
+            id='bedroom'
+            min={0}
+            max={4}
+            placeholder='any'
+          />
         </div>
         <button>
           <svg
