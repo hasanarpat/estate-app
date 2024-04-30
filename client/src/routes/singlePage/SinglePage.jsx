@@ -1,32 +1,38 @@
 import Slider from '../../components/slider/Slider';
 import Map from '../../components/map/Map';
-import { singlePostData, userData } from '../../lib/dummy';
 import './singlePage.scss';
+import { useLoaderData } from 'react-router-dom';
+import DOMPurify from 'dompurify';
 
 const SinglePage = () => {
-  const data = singlePostData;
+  const post = useLoaderData();
 
   return (
     <main className='singlePage'>
       <div className='details'>
         <div className='wrapper'>
-          <Slider images={data.images} />
+          <Slider images={post.images} />
           <div className='info'>
             <div className='top'>
               <div className='post'>
-                <h1>{data.title}</h1>
+                <h1>{post.title}</h1>
                 <div className='address'>
                   <img src='/pin.png' alt='' />
-                  <span>{data.address}</span>
+                  <span>{post.address}</span>
                 </div>
-                <div className='price'>${data.price}</div>
+                <div className='price'>${post.price}</div>
               </div>
               <div className='user'>
-                <img src={userData.img} alt='' />
-                <span>{userData.name}</span>
+                <img src={post.user.avatar} alt='' />
+                <span>{post.user.name}</span>
               </div>
             </div>
-            <div className='bottom'>{singlePostData.description}</div>
+            <div
+              className='bottom'
+              dangerouslySetInnerHTML={{
+                __html: DOMPurify.sanitize(post.postDetail.desc),
+              }}
+            ></div>
           </div>
         </div>
       </div>
@@ -38,21 +44,29 @@ const SinglePage = () => {
               <img src='/utility.png' alt='' />
               <div className='featuretext'>
                 <span>Utilities</span>
-                <p>Renter is responsible</p>
+                {post.postDetail.utilities === 'owner' ? (
+                  <p>Owner is responsible</p>
+                ) : (
+                  <p>Tenant is responsible</p>
+                )}
               </div>
             </div>
             <div className='feature'>
               <img src='/pet.png' alt='' />
               <div className='featuretext'>
                 <span>Pet Policy</span>
-                <p>Pets Allowed</p>
+                {post.postDetailpet === 'allowed' ? (
+                  <p>Pets Allowed</p>
+                ) : (
+                  <p>Pets Not Allowed</p>
+                )}
               </div>
             </div>
             <div className='feature'>
               <img src='/fee.png' alt='' />
               <div className='featuretext'>
-                <span>Property fees</span>
-                <p>Must have 3x the rent in totatl household income</p>
+                <span>Income Policy</span>
+                <p>{post.postDetail.income}</p>
               </div>
             </div>
           </div>
@@ -60,15 +74,15 @@ const SinglePage = () => {
           <div className='listHorizontal sizes'>
             <div className='size'>
               <img src='/size.png' alt='' />
-              <span>80sqft</span>
+              <span>{post.postDetail.size} sqft</span>
             </div>
             <div className='size'>
               <img src='/bed.png' alt='' />
-              <span>2 beds</span>
+              <span>{post.bedroom} beds</span>
             </div>
             <div className='size'>
               <img src='/bath.png' alt='' />
-              <span>1 bathroom</span>
+              <span>{post.bathroom} bathroom</span>
             </div>
           </div>
           <p className='title'>Nearby Places</p>
@@ -76,19 +90,22 @@ const SinglePage = () => {
             <div className='place'>
               <img src='/school.png' alt='' />
               <span>School</span>
+              <p>{post.postDetail.school} m away</p>
             </div>
             <div className='place'>
               <img src='/bus.png' alt='' />
               <span>Bus Stop</span>
+              <p>{post.postDetail.bus} m away</p>
             </div>
             <div className='place'>
               <img src='/restaurant.png' alt='' />
               <span>Restaurant</span>
+              <p>{post.postDetail.restaurant} m away</p>
             </div>
           </div>
           <p className='title'>Location</p>
           <div className='mapContainer'>
-            <Map items={[singlePostData]} />
+            <Map items={[post]} />
           </div>
           <div className='buttons'>
             <button>
